@@ -1,0 +1,23 @@
+.navbar {
+    height: 60px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+p {
+    color: aliceblue;
+    /* display: flex;  */
+    gap: 20px
+}
+
+
+.logout{
+    cursor: pointer;
+    font-weight: 600;
+}
+

@@ -1,0 +1,56 @@
+.navbar{
+    height: 60px;
+    width: 100%;
+    background-color: black;
+    color: white;
+     display: flex; 
+     gap:40px;
+     justify-content: center;
+     align-items: center;
+}
+p{
+    color: aliceblue;
+     /* display: flex;  */
+    gap:20px
+}
+
+
+table{
+    width: 100%;
+}
+
+
+.loading_indicater{
+    height: 100%;
+    width: 200px;
+    /* border:2px solid red; */
+    margin: auto;
+}
+
+.btncontroll{
+    height: 60px;
+    width: 400px;
+    /* border:1px solid grey; */
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.btn_sorting{
+    background-color: black;
+    color:white;
+    width: 100%;
+    cursor: pointer;
+}
+
+.btn_sorting:hover{
+    background-color:white ;
+    color: black;
+}
+
+.logOut{
+    cursor: pointer;
+    font-weight: 600;
+}
