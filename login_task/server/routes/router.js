@@ -114,7 +114,7 @@ router.post("/update_credential/:_id", async (req, res) => {
 
 //subadmin api 
 
-//get api 
+//get all api 
 
 router.get("/subadmins", async (req, res) => {
     try {
@@ -168,21 +168,41 @@ router.delete("/subadmin/:_id", async (req, res) => {
 
 
 
+//get single user api
+
+router.get("/single_admin/:_id", async (req, res) => {
+    try {
+        const result = await SubAdmin.findById(req.params)
+        res.send(result)
+    } catch (error) {
+
+    }
+})
+
+
 
 
 
 //update api 
-
 router.post("/update_subadmin/:id", async (req, res) => {
-    const { first_name, last_name, email_id, password, status } = req.body
-    let result = await User.updateOne({
-        first_name,
-        last_name,
-        email_id,
-        password,
-        status
-    })
-})
-
+    const { first_name, last_name, email_id, password, status } = req.body;
+    try {
+        const result = await SubAdmin.findByIdAndUpdate(req.params.id, {
+            first_name,
+            last_name,
+            email_id,
+            password,
+            status
+        });
+        if (result) {
+            res.json({ message: "Subadmin updated successfully" });
+        } else {
+            res.status(404).json({ error: "Subadmin not found" });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
 
 module.exports = router
