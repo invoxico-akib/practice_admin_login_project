@@ -35,8 +35,8 @@ const DeleteSubAdmin = ({ id, refetch }) => {
 
     return (
         <>
-            <AiOutlineDelete onClick={handleShow} />
-
+            <AiOutlineDelete onClick={handleShow} style={{ cursor: "pointer" }} />
+            
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Delete Sub Admin</Modal.Title>

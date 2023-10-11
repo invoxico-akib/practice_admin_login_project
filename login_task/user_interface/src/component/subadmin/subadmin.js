@@ -6,6 +6,7 @@ import { AiOutlineDelete } from "react-icons/ai"
 import { AiOutlineEdit } from "react-icons/ai"
 import CreateSubAdmin from "./create_subadmin_modal"
 import DeleteSubAdmin from "./deletesubadmin"
+import { UpdateSubAdmin } from "./update_subadmin.modal"
 
 export const SubAdmin = () => {
 
@@ -52,14 +53,18 @@ export const SubAdmin = () => {
                         return (
 
                             <tr key={index}>
-                                <td>{index+1}</td>
+                                <td>{index + 1}</td>
                                 <td>{elem.first_name}</td>
                                 <td>{elem.last_name}</td>
                                 <td>{elem.email_id}</td>
                                 <td>{elem.password}</td>
                                 <td>{elem.createdAt}</td>
                                 <td>{elem.status}</td>
-                                <td style={{ cursor: "pointer" }}> <AiOutlineEdit />  &nbsp; <DeleteSubAdmin id={elem._id} refetch={getSubadmin} /></td>
+                                <td style={{ curser: "pointer"}}> 
+                                 <DeleteSubAdmin id={elem._id} refetch={getSubadmin} />
+                                    &nbsp;
+                                <UpdateSubAdmin />
+                                </td>
                             </tr>
                         )
 
