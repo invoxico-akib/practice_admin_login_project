@@ -5,6 +5,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
+import Form from 'react-bootstrap/Form';
+
 
 const Login = () => {
 
@@ -82,26 +84,24 @@ const Login = () => {
                     <h1 className={style.login_system}>Login System</h1>
 
                     <div>
-                        <input placeholder="Enter your Email" type="email" value={email} onChange={((e) => setEmail(e.target.value))} />
+                        <Form.Control type="email" placeholder="Enter your Email" value={email} onChange={((e) => setEmail(e.target.value))}  style={{width:"70%" , margin:"auto"}} />
 
                         {error && !email && <p className={style.warning_text}>Please enter Email Id</p>}
-                    </div>
+                    </div>  <br></br>
 
                     <div>
-                        <input placeholder="Enter your Password" type="password" value={password} onChange={((e) => setPassword(e.target.value))} />
+                        <Form.Control type="password" placeholder="Enter your Password" style={{width:"70%" , margin:"auto"}} value={password} onChange={((e) => setPassword(e.target.value))} />
+
                         {error && !password && <p className={style.warning_text}>Please enter Password</p>}
 
-                    </div>
-
+                    </div> <br></br>
 
                     <button className={style.loginbtn} onClick={handleLogin}>Login</button>
 
                     <Link className={style.forgetbtn} to="/resetPassword">Reset Password</Link>
-                     <Link className={style.forgetbtn} to="/register_newuser">Register New User</Link> 
+                     {/* <Link className={style.forgetbtn} to="/register_newuser">Register New User</Link>  */}
                 </div>
-
-
-
+                
             </div>
         </>
     )

@@ -1,17 +1,18 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import  Styles from "./update_subadmin.module.css"
+import Styles from "./update_subadmin.module.css"
 import { AiOutlineEdit } from "react-icons/ai"
 
-export const UpdateSubAdmin = () => {
+
+export const UpdateSubAdmin = ({ id, refetch }) => {
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+
     const [first_name, setFirstName] = useState("")
     const [last_name, setLastName] = useState("")
     const [email_id, setEmailId] = useState("")
@@ -20,47 +21,49 @@ export const UpdateSubAdmin = () => {
     const [error, setError] = useState(false)
 
 
+    const handleUpdateSubAdmin = async () => {
+        try {
+            const responce = await axios.post(`http://localhost:5000/update_subadmin/${id}`, {
+                first_name,
+                last_name,
+                email_id,
+                password,
+                status
+            })
+            const result = responce.status;
+            console.log("api integrated result", result)
+            if (result == 200) {
+                toast.success("User update successfully!")
+                refetch()
+                handleClose()
 
-
-    //
-
-    const handleCreateSubAdmin = async () => {
-
-        if (!first_name || !last_name || !email_id || !password || !status) {
-            setError(true)
-
-        } else {
-            try {
-                const responce = await axios.post("http://localhost:5000/create-subadmin", {
-                    first_name,
-                    last_name,
-                    email_id,
-                    password,
-                    status
-                })
-                const result = responce.status
-                // refetch()
-
-                if (result === 200) {
-                    toast.success("Congratulation ! Yor are registered successfully")
-                    setFirstName("");
-                    setLastName("")
-                    setEmailId("")
-                    setPassword("")
-                    setStatus("")
-
-                } else {
-                    toast.error("Sorry ! Something went wrong")
-                }
-
-
-            } catch (error) {
-                console.log("something went werong")
-                toast.error("Sorry ! Something went wrong")
-
+            } else {
+                toast.error("User not found")
             }
+        } catch (error) {
+            console.log(error)
+            toast.error("Something went wrong")
+
         }
+
     }
+
+
+
+
+    //get single user
+    const handleShow = async () => {
+        setShow(true);
+        const responce = await axios.get(`http://localhost:5000/single_admin/${id}`)
+        console.log("responce received here", responce.data.first_name)
+        setFirstName(responce.data.first_name)
+        setLastName(responce.data.last_name)
+        setEmailId(responce.data.email_id)
+        setPassword(responce.data.password)
+        setStatus(responce.data.status)
+
+    }
+
 
 
 
@@ -69,9 +72,9 @@ export const UpdateSubAdmin = () => {
     return (
 
         <>
-                <AiOutlineEdit onClick={handleShow} style={{cursor:"pointer"}}/> 
-                 <ToastContainer />
-              <Modal show={show} onHide={handleClose}>
+            <AiOutlineEdit onClick={handleShow} style={{ cursor: "pointer" }} />
+            <ToastContainer />
+            <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Update SubAdmin</Modal.Title>
                 </Modal.Header>
@@ -142,7 +145,7 @@ export const UpdateSubAdmin = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleCreateSubAdmin}>
+                    <Button variant="primary" onClick={handleUpdateSubAdmin}>
                         Update SubAdmin
                     </Button>
                 </Modal.Footer>

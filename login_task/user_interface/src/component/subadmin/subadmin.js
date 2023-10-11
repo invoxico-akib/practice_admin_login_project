@@ -63,7 +63,7 @@ export const SubAdmin = () => {
                                 <td style={{ curser: "pointer"}}> 
                                  <DeleteSubAdmin id={elem._id} refetch={getSubadmin} />
                                     &nbsp;
-                                <UpdateSubAdmin />
+                                <UpdateSubAdmin  id={elem._id} refetch={getSubadmin}/>
                                 </td>
                             </tr>
                         )
